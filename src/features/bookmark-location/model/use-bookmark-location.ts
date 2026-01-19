@@ -56,5 +56,21 @@ export const useBookmarkLocation = () => {
     });
   };
 
-  return { bookmarks, isBookmarks, toggleBookmark, handleUpdateBookmarkLabel };
+  const parseGridFromId = (id: string) => {
+    const match = id.match(/\((\d+)-(\d+)\)$/);
+    if (!match) return null;
+
+    return {
+      nx: Number(match[1]),
+      ny: Number(match[2]),
+    };
+  };
+
+  return {
+    bookmarks,
+    isBookmarks,
+    toggleBookmark,
+    handleUpdateBookmarkLabel,
+    parseGridFromId,
+  };
 };
