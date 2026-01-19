@@ -6,3 +6,5 @@ export { default as IconTemperature } from './icons/icon-temperature';
 export { default as IconHome } from './icons/icon-home';
 export { default as IconButton } from './icon-button';
 export { default as Input } from './input';
+export { default as IconCancel } from './icons/icon-cancel';
+export { default as IconCheck } from './icons/icon-check';
