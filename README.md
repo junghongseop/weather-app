@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 과제 개요
 
-## Getting Started
+본 프로젝트는 <b>리얼티쓰</b>에서 제시한 사전 과제를 구현한 결과물입니다.  
+제공된 요구사항을 기반으로 현위치 날씨 조회 기능을 중심으로 구현했습니다.
 
-First, run the development server:
+## 요구사항 구현 여부
+
+- OpenAPI를 이용해 날씨 정보 렌더링 ✅
+- 첫 화면은 사용자의 현위치 날씨 정보 렌더링 ✅
+- 유저가 원하는 장소를 검색하여 해당 날씨 정보 렌더링 ✅
+- 시, 군, 구, 동, 읍 모든 단위로 검색 가능 ✅
+- 검색 후 매칭되는 장소와 없을경우 문구 표시 및 대한민국 한전으로 검색 ✅
+- 즐겨찾기 추가및 삭제 ✅
+- 즐겨찾기 리스트 카드 UI로 렌더링(기온, 최고/최저 기온 표시) ✅
+- 즐겨찾기 카드 클릭 시 상세 페이지로 이동 ✅
+- 장소의 이름 변경 기능 ✅
+
+## 사용 기술 스택
+
+- Next.js AppRouter
+- TypeScript
+- TailwindCSS
+- Tanstack Query
+- Axios
+
+## 고민했던 점
+
+이번 과제를 진행하며 가장 고민했던 부분은 사용자가 검색한 지역의 날씨를 상세보기 페이지에서 어떤 방식으로 조회할지였습니다.
+초기에는 카카오 API를 활용해 지역 정보를 조회하려 했지만, API 사용을 위한 승인 절차에 시간이 소요된다는 문제가 있었습니다.
+
+이에 따라 다른 방법을 검토하던 중, 공공데이터포털의 기상청 단기예보 API에서 제공하는 자료에 지역별로 활용 가능한 좌표 값이 포함되어 있다는 점을 확인했습니다.
+해당 데이터를 엑셀 형태로 제공받아, 필요한 값만 추출한 뒤 JSON 형식으로 가공하여 사용하는 방식을 선택했습니다.
+
+물론 대한민국의 많은 지역에 대해 좌표 값을 직접 정리해야 했기 때문에 작업 시간이 다소 소요되었지만,
+API 승인에 3~5일 이상이 걸리는 상황을 고려했을 때, 프로젝트 일정 내에서 안정적으로 구현할 수 있는 현실적인 대안이라고 판단했습니다.
+
+또한 FSD 구조를 설계하는 과정에서도 많은 시간과 고민을 들였습니다.
+기본적인 개념과 일부 프로젝트 경험은 있었지만, 이번 과제처럼 프로젝트의 시작부터 끝까지 FSD 구조를 혼자 설계하고 유지하는 경험은 처음이었기 때문에 구조를 잡는 과정이 쉽지 않았습니다.
+
+특히 각 기능을 어떤 단위로 분리할지, features, widgets, shared의 책임을 어디까지 가져갈지에 대해 반복적으로 고민하며 구조를 수정했습니다.
+그 과정에서 단순히 동작하는 구조가 아니라, 확장성과 역할 분리가 명확한 구조를 만들기 위해 의도적으로 시간을 투자하게 되었습니다.
+
+## 실행 방법
+
+### 개발 환경
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 배포 환경
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run build
+npm run start
+```
