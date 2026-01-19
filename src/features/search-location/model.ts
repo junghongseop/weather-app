@@ -41,7 +41,9 @@ export const useSearchLocation = () => {
   };
 
   const handleSelectLocation = (location: string) => {
-    router.push(`/weather/${encodeURIComponent(location)}`);
+    router.push(
+      `/weather/${encodeURIComponent(location.replace(/\(.*?\)/g, '').trim())}`
+    );
     handleCloseResult();
   };
 
