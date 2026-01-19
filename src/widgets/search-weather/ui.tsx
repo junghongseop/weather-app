@@ -1,7 +1,9 @@
 'use client';
 
-import { BookmarkButton } from '@/features/bookmark-location';
-import { useBookmarkLocation } from '@/features/bookmark-location/button/model';
+import {
+  BookmarkButton,
+  useBookmarkLocation,
+} from '@/features/bookmark-location';
 import { SearchLocation } from '@/features/search-location';
 import { useSearchLocation } from '@/features/search-location';
 import { useEffect, useRef } from 'react';
