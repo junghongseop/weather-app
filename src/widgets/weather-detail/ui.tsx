@@ -1,9 +1,5 @@
 'use client';
 
-import {
-  BookmarkButton,
-  useBookmarkLocation,
-} from '@/features/bookmark-location';
 import CurrentWeatherSummary from '@/features/current-weather/ui/current-weather-information';
 import HourlyTemperature from '@/features/current-weather/ui/hourly-temperature-chart';
 import { useDistrictGridQuery } from '@/features/location';
@@ -14,7 +10,6 @@ interface WeatherDetailWidgetProps {
 }
 
 const WeatherDetailWidget = ({ location }: WeatherDetailWidgetProps) => {
-  const bookmark = useBookmarkLocation();
   const { data: district, isLoading: isDistrictLoading } = useDistrictGridQuery(
     decodeURIComponent(location)
   );
@@ -41,19 +36,13 @@ const WeatherDetailWidget = ({ location }: WeatherDetailWidgetProps) => {
     .filter((item) => item.category === 'TMP')
     .map((item) => Number(item.fcstValue));
 
-  const decodeLocation = decodeURIComponent(location.replaceAll('-', ' '));
+  const decodeLocation = decodeURIComponent(location);
 
   return (
     <main className="flex min-h-[calc(100vh-64px)] justify-center px-4 py-8">
       <div className="w-full max-w-md space-y-6">
-        <div className="flex items-top justify-between">
-          <h2 className="mb-4 text-3xl font-semibold">{decodeLocation}</h2>
-          <BookmarkButton
-            id={decodeLocation}
-            label={decodeLocation}
-            bookmark={bookmark}
-          />
-        </div>
+        <h2 className="mb-4 text-3xl font-semibold">{decodeLocation}</h2>
+
         <CurrentWeatherSummary
           current={hourlyTemps[0]}
           min={Math.min(...hourlyTemps)}
