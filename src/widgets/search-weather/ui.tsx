@@ -52,7 +52,10 @@ const SearchWeather = () => {
                   className="flex items-center justify-between px-4 py-2 cursor-pointer hover:bg-gray-100"
                   onClick={() => handleSelectLocation(item)}
                 >
-                  {item.replaceAll('-', ' ')}
+                  {item
+                    .replace(/\(.*?\)/g, '')
+                    .replaceAll('-', ' ')
+                    .trim()}
                   <div
                     onClick={(e) => {
                       e.stopPropagation();
@@ -60,7 +63,10 @@ const SearchWeather = () => {
                   >
                     <BookmarkButton
                       id={item}
-                      label={item.replaceAll('-', ' ')}
+                      label={item
+                        .replace(/\(.*?\)/g, '')
+                        .replaceAll('-', ' ')
+                        .trim()}
                       bookmark={bookmark}
                     />
                   </div>
